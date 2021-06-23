@@ -4,14 +4,10 @@ import java.io.*;
 import java.net.Socket;
 
 public class ClientHandler implements Runnable{
-    private Socket client;
-    BufferedReader reader =
-            new BufferedReader(new FileReader("src/main/resources/input.txt"));
-    private BufferedReader bufferedReader = new BufferedReader(reader);
-    private PrintWriter writer;
+    private final BufferedReader bufferedReader;
+    private final PrintWriter writer;
 
     public ClientHandler(Socket client) throws IOException {
-        this.client = client;
         bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
     }
