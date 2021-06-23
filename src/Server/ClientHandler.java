@@ -5,12 +5,14 @@ import java.net.Socket;
 
 public class ClientHandler implements Runnable{
     private Socket client;
-    private BufferedReader reader;
+    BufferedReader reader =
+            new BufferedReader(new FileReader("src/main/resources/input.txt"));
+    private BufferedReader bufferedReader = new BufferedReader(reader);
     private PrintWriter writer;
 
     public ClientHandler(Socket client) throws IOException {
         this.client = client;
-        reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+        bufferedReader = new BufferedReader(new InputStreamReader(client.getInputStream()));
         writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
     }
 
@@ -59,7 +61,7 @@ public class ClientHandler implements Runnable{
         {
             try
             {
-                String ll = reader.readLine();
+                String ll = bufferedReader.readLine();
                 System.out.println(ll);
                 writer.write(calcRes(ll));
                 writer.flush();

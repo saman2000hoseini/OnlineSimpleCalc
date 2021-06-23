@@ -8,14 +8,14 @@ public class Server implements Runnable {
     private static ServerSocket server;
 
     public Server() throws IOException {
-        server = new ServerSocket(6501);
+        server = new ServerSocket(65432);
     }
 
     @Override
     public void run() {
         while (true)
         {
-            Socket client = null;
+            Socket client = new Socket();
             try
             {
                 client = server.accept();
